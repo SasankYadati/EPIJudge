@@ -2,8 +2,17 @@ from test_framework import generic_test
 
 
 def closest_int_same_bit_count(x: int) -> int:
-    # TODO - you fill in here.
-    return 0
+    n_bits = 64
+    for i in range(n_bits-1):
+        b1 = (x >> i) & 1
+        b2 = (x >> (i+1)) & 1
+        if b1 != b2:
+            x = x ^ (1 << i)
+            x = x ^ (1 << (i + 1))
+            return x
+    
+    raise ValueError("x is all zeros or ones")
+            
 
 
 if __name__ == '__main__':
